@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+@theme {
+  --color-charcoal: #20201e;
+  --color-ivory: #f7f4ec;
+  --color-accent: #80633a;
+  --color-muted: #62615a;
+  --text-caption: clamp(0.75rem, 0.72rem + 0.12vw, 0.875rem);
+  --text-body: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
+  --text-title: clamp(2rem, 1.35rem + 2.8vw, 4.5rem);
+  --text-display: clamp(2.75rem, 1.5rem + 5vw, 7rem);
+  --text-display--line-height: 1.04;
+  --text-title--line-height: 1.1;
+  --spacing: 0.25rem;
+  --spacing-section: clamp(4rem, 2rem + 6vw, 9rem);
+  --spacing-gutter: clamp(1.25rem, 0.6rem + 3vw, 4rem);
+  --container-editorial: 90rem;
+  --container-reading: 48rem;
+}
+@theme inline {
+  --font-heading: var(--font-cormorant), Georgia, serif;
+  --font-sans: var(--font-manrope), Arial, sans-serif;
+}
+@layer base {
+  body { @apply bg-ivory text-charcoal font-sans antialiased; }
+  :focus-visible { outline: 2px solid var(--color-accent); outline-offset: 4px; }
+  button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
+  button, a { touch-action: manipulation; }
+  button:not(:disabled) { cursor: pointer; }
+  ::selection { background: var(--color-charcoal); color: var(--color-ivory); }
+}
+@utility page-shell {
+  width: 100%;
+  max-width: var(--container-editorial);
+  margin-inline: auto;
+  padding-inline: var(--spacing-gutter);
+}
+@utility editorial-label { font-size: var(--text-caption); letter-spacing: 0.18em; text-transform: uppercase; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+
