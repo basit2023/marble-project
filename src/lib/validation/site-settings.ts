@@ -14,6 +14,7 @@ export const siteSettingsValidation = baseValidation.extend({
   email: z.array(z.email()),
   addresses: z.array(addressValidation),
   businessHours: optionalText,
+  priceRange: optionalText,
   socialLinks: z.array(socialLinkValidation),
   defaultSeo: seoValidation,
   googleAnalyticsId: z.string().regex(/^G-[A-Z0-9]+$/).optional(),

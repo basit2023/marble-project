@@ -19,6 +19,7 @@ schema.add({
   email: { type: [String], default: [] },
   addresses: { type: [addressSchema], default: [] },
   businessHours: { type: String, trim: true },
+  priceRange: { type: String, trim: true },
   socialLinks: { type: [socialLinkSchema], default: [] },
   defaultSeo: { type: seoSchema, default: () => ({}) },
   googleAnalyticsId: { type: String, trim: true },

@@ -8,5 +8,5 @@ export const userValidation = baseValidation.extend({
   passwordHash: text,
   role: z.enum(E.USER_ROLES),
   lastLoginAt: z.date().optional(),
+  forcePasswordChange: z.boolean(),
 });
-

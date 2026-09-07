@@ -2,9 +2,8 @@ import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]): string { return twMerge(clsx(inputs)); }
-// Public environment values are validated at build time by next.config.ts.
-// Pass the database-owned contact number when site settings become available.
-export function buildWhatsAppLink(message: string, number = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER): string {
+// The contact number comes from database-owned site settings at each call site.
+export function buildWhatsAppLink(message: string, number: string): string {
   if (!number || !/^[1-9]\d{7,14}$/.test(number)) throw new Error("Invalid international WhatsApp number.");
   return `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
 }

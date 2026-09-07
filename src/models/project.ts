@@ -25,7 +25,7 @@ schema.add({
 });
 
 addZodValidation(schema, projectValidation);
+schema.index({ title: "text", description: "text", client: "text", location: "text", country: "text" }, { weights: { title: 10, client: 5, location: 4, country: 4, description: 1 }, name: "project_search" });
 
 export const Project = (models.Project as ContentModel<IProject> | undefined)
   ?? model<IProject, ContentModel<IProject>>("Project", schema);
-

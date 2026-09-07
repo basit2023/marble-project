@@ -12,10 +12,10 @@ schema.add({
   passwordHash: { type: String, required: true, select: false },
   role: { type: String, enum: E.USER_ROLES, required: true, default: "editor" },
   lastLoginAt: { type: Date },
+  forcePasswordChange: { type: Boolean, default: false, required: true },
 });
 
 addZodValidation(schema, userValidation);
 schema.set("toJSON", { transform: (_doc, ret) => { Reflect.deleteProperty(ret, "passwordHash"); return ret; } });
 export const User = (models.User as ContentModel<IUser> | undefined)
   ?? model<IUser, ContentModel<IUser>>("User", schema);
-

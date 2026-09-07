@@ -34,5 +34,6 @@ addZodValidation(schema, blogPostValidation);
 schema.index({ category: 1 });
 schema.index({ publishedAt: -1 });
 schema.index({ isActive: 1, isDeleted: 1, isPublished: 1, publishedAt: -1 });
+schema.index({ title: "text", excerpt: "text", content: "text", tags: "text" }, { weights: { title: 10, tags: 5, excerpt: 3, content: 1 }, name: "blog_search" });
 export const BlogPost = (models.BlogPost as ContentModel<IBlogPost> | undefined)
   ?? model<IBlogPost, ContentModel<IBlogPost>>("BlogPost", schema);

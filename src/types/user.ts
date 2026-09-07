@@ -7,5 +7,5 @@ export interface IUser extends IBaseContent {
   passwordHash: string;
   role: (typeof E.USER_ROLES)[number];
   lastLoginAt?: Date;
+  forcePasswordChange: boolean;
 }
-

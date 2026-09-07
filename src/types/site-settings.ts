@@ -14,6 +14,8 @@ export interface ISiteSettings extends IBaseContent {
   email: string[];
   addresses: IAddress[];
   businessHours?: string;
+  /** schema.org priceRange hint for LocalBusiness, e.g. "$$" or "PKR 2,000–25,000 / sq ft". */
+  priceRange?: string;
   socialLinks: ISocialLink[];
   defaultSeo: ISeo;
   googleAnalyticsId?: string;

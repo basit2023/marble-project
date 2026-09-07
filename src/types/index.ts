@@ -15,4 +15,5 @@ export type { IInquiry } from "./inquiry";
 export type { IAuditLog } from "./audit-log";
 export type { ISystemContent } from "./system-content";
 export type * from "./subdocuments";
-
+export type { IAdminUiContent } from "./admin-ui-content";
+export type { IPublicUiContent } from "./public-ui-content";

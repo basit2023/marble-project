@@ -15,3 +15,6 @@ export { AuditLog } from "./audit-log";
 export { SystemContent } from "./system-content";
 export { AdminContent } from "./admin-content";
 export { SecurityLimit } from "./security-limit";
+export { AdminUiContent } from "./admin-ui-content";
+export { PublicUiContent } from "./public-ui-content";
+export { Page } from "./page";

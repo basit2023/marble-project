@@ -29,6 +29,13 @@
   button:not(:disabled) { cursor: pointer; }
   ::selection { background: var(--color-charcoal); color: var(--color-ivory); }
 }
+@keyframes ken-burns { from { transform: scale(1); } to { transform: scale(1.08); } }
+@utility animate-ken-burns { animation: ken-burns 9s ease-out both; }
+.prose { color: var(--color-muted); line-height: 1.75; }
+.prose p + p, .prose ul, .prose ol, .prose blockquote { margin-top: 1rem; }
+.prose ul { list-style: disc; padding-left: 1.25rem; }
+.prose ol { list-style: decimal; padding-left: 1.25rem; }
+.prose a { color: var(--color-accent); text-decoration: underline; text-underline-offset: 3px; }
 @utility page-shell {
   width: 100%;
   max-width: var(--container-editorial);
@@ -39,4 +46,3 @@
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
-
