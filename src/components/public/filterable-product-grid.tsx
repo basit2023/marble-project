@@ -56,7 +56,7 @@ export function FilterableProductGrid({ products }: { products: ProductCardDTO[]
           <CardImage key={product.id} href={`/materials/${product.categorySlug}/${product.slug}`} title={product.name} meta={[product.colourFamily, product.origin].filter(Boolean).join(" / ")} image={product.primaryImage} />
         ))}
       </div>
-      {filtered.length > visible ? <button type="button" onClick={() => setVisible((count) => count + PAGE_SIZE)} className="mt-10 border border-charcoal px-6 py-3 text-sm font-semibold uppercase tracking-[0.18em]">Load more</button> : null}
+      {filtered.length > visible ? <button type="button" onClick={() => setVisible((count) => count + PAGE_SIZE)} className="mt-10 border border-ivory px-6 py-3 text-sm font-semibold uppercase tracking-[0.18em]">Load more</button> : null}
     </section>
   );
 }

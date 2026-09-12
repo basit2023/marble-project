@@ -33,12 +33,12 @@ export function BlogArticleClient({ html, title }: { html: string; title: string
       <div className="page-shell grid gap-10 py-section lg:grid-cols-[16rem_1fr]">
         <aside className="hidden lg:block">
           <nav className="sticky top-28 grid gap-3 text-sm text-muted" aria-label="Table of contents">
-            {headings.map((heading) => <a key={heading.id} href={`#${heading.id}`} className="hover:text-charcoal">{heading.title}</a>)}
+            {headings.map((heading) => <a key={heading.id} href={`#${heading.id}`} className="hover:text-ivory">{heading.title}</a>)}
           </nav>
         </aside>
         <article>
           <div className="mb-8 flex gap-3">
-            {(["x", "linkedin", "facebook"] as const).map((item) => <button key={item} type="button" onClick={() => share(item)} className="border border-charcoal/20 px-4 py-2 text-xs uppercase tracking-[0.14em]">{item}</button>)}
+            {(["x", "linkedin", "facebook"] as const).map((item) => <button key={item} type="button" onClick={() => share(item)} className="border border-ivory/20 px-4 py-2 text-xs uppercase tracking-[0.14em]">{item}</button>)}
           </div>
           <div className="prose max-w-none" dangerouslySetInnerHTML={{ __html: articleHtml }} />
         </article>

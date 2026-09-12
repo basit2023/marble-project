@@ -1,4 +1,4 @@
-const shimmer = "animate-pulse rounded bg-charcoal/10";
+const shimmer = "animate-pulse rounded bg-white/10";
 
 /** Route-segment loading placeholder. Mirrors the PageHero + content rhythm. */
 export function PageSkeleton({ variant = "listing" }: { variant?: "listing" | "detail" | "article" }) {

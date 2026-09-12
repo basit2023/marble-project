@@ -27,7 +27,7 @@ export default async function BlogPage() {
         itemListLd({ site, items: posts.map((post) => ({ name: post.title, path: `/blog/${post.slug}` })) }),
       ]} />
       <section className="page-shell py-section">
-        <div className="mb-10 flex flex-wrap gap-3">{BLOG_CATEGORIES.map((category) => <Link key={category} href={`/blog/category/${encodeURIComponent(category)}` as Route} className="border border-charcoal/15 px-3 py-2 text-sm">{category}</Link>)}</div>
+        <div className="mb-10 flex flex-wrap gap-3">{BLOG_CATEGORIES.map((category) => <Link key={category} href={`/blog/category/${encodeURIComponent(category)}` as Route} className="border border-ivory/15 px-3 py-2 text-sm">{category}</Link>)}</div>
         <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">{posts.map((post) => <CardImage key={post.id} href={`/blog/${post.slug}`} title={post.title} meta={[post.category, post.publishedAt ? formatDate(post.publishedAt) : undefined, `${post.readTimeMinutes} min read`].filter(Boolean).join(" / ")} image={post.coverImage} />)}</div>
       </section>
     </>

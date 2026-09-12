@@ -49,7 +49,7 @@ export function NewsletterForm({ copy }: { copy?: PublicCopy }) {
           aria-describedby={errors.email ? errorId : undefined}
           className="min-h-11 min-w-0 flex-1 border border-white/15 bg-white/10 px-3 text-base text-ivory placeholder:text-ivory/50"
         />
-        <button type="submit" disabled={isSubmitting} className="min-h-11 bg-accent px-4 text-sm font-semibold text-white disabled:opacity-60">
+        <button type="submit" disabled={isSubmitting} className="min-h-11 bg-accent px-4 text-sm font-semibold text-charcoal disabled:opacity-60">
           {isSubmitting ? t.subscribing : t.subscribe}
         </button>
       </div>

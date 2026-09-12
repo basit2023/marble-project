@@ -38,7 +38,7 @@ export function AdminShell({ copy, user, unread, children }: {
         return <Link key={key} href={href as Route} title={collapsed ? label : undefined}
           className={cn("my-1 flex min-h-11 items-center gap-3 rounded px-3 text-sm text-white/75 hover:bg-white/10 hover:text-white focus-visible:outline-offset-[-2px]", active && "bg-white/10 text-white")}>
           <Icon className="size-5 shrink-0" />{!collapsed && <span className="flex-1">{label}</span>}
-          {!collapsed && key === "inquiries" && unread > 0 && <span className="rounded-full bg-accent px-2 py-0.5 text-xs text-white">{unread}</span>}
+          {!collapsed && key === "inquiries" && unread > 0 && <span className="rounded-full bg-accent px-2 py-0.5 text-xs text-charcoal">{unread}</span>}
         </Link>;
       })}
     </nav>

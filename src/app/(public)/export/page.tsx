@@ -17,5 +17,5 @@ export async function generateMetadata() {
 export default async function ExportPage() {
   const [page, products] = await Promise.all([getContentPage("export"), getQuoteOptions()]);
   if (!page) notFound();
-  return <StaticPageView page={page} breadcrumbs={[{ label: "Home", href: "/" }, { label: page.title }]}><section className="page-shell pb-section"><div className="max-w-3xl border-t border-charcoal/10 pt-10"><h2 className="font-heading text-title">Export enquiry</h2><PublicInquiryForm source="Contact Form" inquiryType="Export" products={products} extraFields /></div></section></StaticPageView>;
+  return <StaticPageView page={page} breadcrumbs={[{ label: "Home", href: "/" }, { label: page.title }]}><section className="page-shell pb-section"><div className="max-w-3xl border-t border-ivory/10 pt-10"><h2 className="font-heading text-title">Export enquiry</h2><PublicInquiryForm source="Contact Form" inquiryType="Export" products={products} extraFields /></div></section></StaticPageView>;
 }

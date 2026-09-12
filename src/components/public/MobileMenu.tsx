@@ -118,7 +118,7 @@ export function MobileMenu({ open, onClose, siteName, phone, quoteUrl, nav, mate
           <Link
             href={quoteUrl as Route}
             tabIndex={tab}
-            className="flex min-h-12 items-center justify-center bg-accent px-6 font-semibold text-white"
+            className="flex min-h-12 items-center justify-center bg-accent px-6 text-sm font-semibold uppercase tracking-[0.1em] text-charcoal"
           >
             Get a Quote
           </Link>

@@ -18,7 +18,7 @@ export function AnnouncementBar({ text, url, copy }: { text: string; url?: strin
     document.documentElement.style.setProperty("--announcement-height", "0px");
     setVisible(false);
   };
-  return <div className="relative z-50 flex min-h-11 items-center justify-center gap-3 bg-accent py-2 pl-4 pr-12 text-center text-sm tracking-wide text-white">
+  return <div className="relative z-50 flex min-h-11 items-center justify-center gap-3 bg-accent py-2 pl-4 pr-12 text-center text-sm tracking-wide text-charcoal">
     {url ? <a href={url} className="underline underline-offset-4">{text}</a> : <p>{text}</p>}
     <button type="button" aria-label={copy.labels.dismissAnnouncement} onClick={dismiss} className="absolute right-1 grid min-h-11 min-w-11 place-items-center">
       <X className="size-4" aria-hidden="true" />

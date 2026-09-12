@@ -63,7 +63,7 @@ export function HeaderClient({ siteName, logo, phone, quoteUrl, nav, materials }
     if (!event.currentTarget.contains(event.relatedTarget)) setMaterialsOpen(false);
   };
 
-  const linkClass = "flex min-h-11 items-center px-3 text-sm text-ivory/80 transition-colors hover:text-ivory aria-[current=page]:text-ivory aria-[current=page]:underline aria-[current=page]:decoration-accent aria-[current=page]:underline-offset-[10px]";
+  const linkClass = "flex min-h-11 items-center px-3 text-[13px] font-semibold uppercase tracking-[0.1em] text-ivory/80 transition-colors hover:text-ivory aria-[current=page]:text-ivory aria-[current=page]:underline aria-[current=page]:decoration-accent aria-[current=page]:underline-offset-[10px]";
 
   return (
     <>
@@ -157,7 +157,7 @@ export function HeaderClient({ siteName, logo, phone, quoteUrl, nav, materials }
             )}
             <Link
               href={quoteUrl as Route}
-              className="flex min-h-11 items-center bg-accent px-5 text-sm font-semibold text-white transition-colors hover:bg-accent/85"
+              className="flex min-h-11 items-center bg-accent px-5 text-[13px] font-semibold uppercase tracking-[0.1em] text-charcoal transition-colors hover:bg-accent/85"
             >
               Get a Quote
             </Link>

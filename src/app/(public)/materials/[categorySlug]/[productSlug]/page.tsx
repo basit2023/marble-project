@@ -63,22 +63,22 @@ export default async function ProductPage({ params }: { params: Promise<{ catego
             {[["Finishes", data.product.finishes], ["Formats", data.product.availableFormats], ["Applications", data.product.applications], ["Thickness", data.product.thicknessOptions], ["Sizes", data.product.sizeOptions]].map(([label, values]) => (
               <div key={String(label)}>
                 <h2 className="text-sm font-semibold uppercase tracking-[0.14em] text-muted">{label}</h2>
-                <div className="mt-3 flex flex-wrap gap-2">{(values as string[]).map((value) => <span key={value} className="border border-charcoal/15 px-3 py-1 text-sm">{value}</span>)}</div>
+                <div className="mt-3 flex flex-wrap gap-2">{(values as string[]).map((value) => <span key={value} className="border border-ivory/15 px-3 py-1 text-sm">{value}</span>)}</div>
               </div>
             ))}
           </div>
           {specs.length ? (
             <table className="mt-8 w-full border-collapse text-left text-sm">
-              <tbody>{specs.map(([key, value]) => <tr key={key} className="border-t border-charcoal/10"><th className="py-3 font-semibold capitalize">{key.replace(/[A-Z]/g, " $&")}</th><td className="py-3 text-muted">{String(value)}</td></tr>)}</tbody>
+              <tbody>{specs.map(([key, value]) => <tr key={key} className="border-t border-ivory/10"><th className="py-3 font-semibold capitalize">{key.replace(/[A-Z]/g, " $&")}</th><td className="py-3 text-muted">{String(value)}</td></tr>)}</tbody>
             </table>
           ) : null}
           <div className="mt-10 flex flex-wrap gap-3">
-            <Link href={"#request-quote" as Route} className="bg-charcoal px-6 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-ivory">Request a quote</Link>
+            <Link href={"#request-quote" as Route} className="bg-accent px-6 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-charcoal">Request a quote</Link>
             {whatsapp ? <a href={whatsapp} className="border border-accent px-6 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-accent">WhatsApp</a> : null}
           </div>
         </div>
       </section>
-      <section id="request-quote" className="page-shell pb-section"><div className="max-w-3xl border-t border-charcoal/10 pt-10"><h2 className="font-heading text-title">Request a Quote</h2><PublicInquiryForm source="Product Page" inquiryType="Quote" product={data.product} extraFields /></div></section>
+      <section id="request-quote" className="page-shell pb-section"><div className="max-w-3xl border-t border-ivory/10 pt-10"><h2 className="font-heading text-title">Request a Quote</h2><PublicInquiryForm source="Product Page" inquiryType="Quote" product={data.product} extraFields /></div></section>
       {data.related.length ? <section className="page-shell grid gap-8 pb-section md:grid-cols-2 xl:grid-cols-4"><h2 className="font-heading text-title md:col-span-2 xl:col-span-4">Related stones</h2>{data.related.map((item) => <CardImage key={item.id} href={`/materials/${item.categorySlug}/${item.slug}`} title={item.name} meta={item.colourFamily} image={item.primaryImage} />)}</section> : null}
       <JsonLd data={[
         breadcrumbLd(trail.map((crumb, index) => index === trail.length - 1 ? { label: crumb.label, href: path } : crumb), site),

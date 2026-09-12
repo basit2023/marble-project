@@ -34,8 +34,8 @@ export function PublicInquiryForm({ source, inquiryType = "General", product, pr
     "aria-invalid": errors[name] ? (true as const) : undefined,
     "aria-describedby": errors[name] ? errId(name) : undefined,
   });
-  const inputClass = "min-h-11 border border-charcoal/25 bg-transparent px-4 py-3 text-base";
-  const errorClass = "text-sm text-red-700";
+  const inputClass = "min-h-11 border border-ivory/25 bg-transparent px-4 py-3 text-base placeholder:text-ivory/40";
+  const errorClass = "text-sm text-red-400";
 
   const submit = handleSubmit((values) => {
     setStatus("");
@@ -81,7 +81,7 @@ export function PublicInquiryForm({ source, inquiryType = "General", product, pr
           {products.length ? (
             <label className="grid gap-1.5 text-sm">
               <span>Products of interest</span>
-              <select {...register("productInterest")} multiple className="min-h-32 border border-charcoal/25 bg-transparent px-4 py-3 text-base">
+              <select {...register("productInterest")} multiple className="min-h-32 border border-ivory/25 bg-charcoal px-4 py-3 text-base">
                 {products.map((item) => <option key={item.id} value={item.id}>{item.name}</option>)}
               </select>
             </label>
@@ -90,11 +90,11 @@ export function PublicInquiryForm({ source, inquiryType = "General", product, pr
       ) : null}
       <label className="grid gap-1.5 text-sm">
         <span>Tell us about your project</span>
-        <textarea {...register("message")} {...a11y("message")} rows={5} className="border border-charcoal/25 bg-transparent px-4 py-3 text-base" />
+        <textarea {...register("message")} {...a11y("message")} rows={5} className="border border-ivory/25 bg-transparent px-4 py-3 text-base placeholder:text-ivory/40" />
         {errors.message && <span id={errId("message")} className={errorClass}>Add a short project description (at least 10 characters).</span>}
       </label>
-      <p aria-live="polite" role="status" className={`text-sm ${ok ? "text-green-800" : "text-red-700"}`}>{status}</p>
-      <button disabled={pending} className="min-h-11 w-fit bg-charcoal px-6 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-ivory disabled:opacity-60">
+      <p aria-live="polite" role="status" className={`text-sm ${ok ? "text-green-400" : "text-red-400"}`}>{status}</p>
+      <button disabled={pending} className="min-h-11 w-fit bg-accent px-6 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-charcoal disabled:opacity-60">
         {pending ? "Sending…" : "Send enquiry"}
       </button>
     </form>

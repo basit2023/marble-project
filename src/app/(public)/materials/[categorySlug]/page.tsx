@@ -40,7 +40,7 @@ export default async function MaterialDetailPage({ params }: { params: Promise<{
       <PageHero eyebrow="Material" title={data.category.name} body={data.category.description} image={data.category.coverImage} ctaLabel="Enquire about this material" ctaHref="#material-enquiry" breadcrumbs={trail} />
       <FilterableProductGrid products={data.products} />
       <section id="material-enquiry" className="page-shell pb-section">
-        <div className="max-w-3xl border-t border-charcoal/10 pt-10">
+        <div className="max-w-3xl border-t border-ivory/10 pt-10">
           <h2 className="font-heading text-title">Ask for availability</h2>
           <PublicInquiryForm source="Contact Form" inquiryType="Quote" products={data.products} extraFields />
         </div>

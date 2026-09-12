@@ -7,7 +7,7 @@ export function ContentSections({ sections }: { sections: PageSectionDTO[] }) {
   return (
     <div className="page-shell grid gap-12 py-section">
       {sections.map((section, index) => (
-        <section key={`${section.key}-${index}`} className="grid gap-8 border-t border-charcoal/10 pt-10 lg:grid-cols-[.8fr_1.2fr]">
+        <section key={`${section.key}-${index}`} className="grid gap-8 border-t border-ivory/10 pt-10 lg:grid-cols-[.8fr_1.2fr]">
           <div>
             <p className="editorial-label text-accent">{section.key}</p>
             {section.title ? <h2 className="mt-4 font-heading text-title">{section.title}</h2> : null}

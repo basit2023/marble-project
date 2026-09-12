@@ -15,11 +15,11 @@ export function FilterableProjectGrid({ projects }: { projects: ProjectCardDTO[]
   return (
     <section className="page-shell py-section">
       <div className="mb-10 grid gap-4 sm:grid-cols-2">
-        <select aria-label="Filter by project type" value={type} onChange={(event) => setType(event.target.value)} className="border border-charcoal/20 bg-ivory px-3 py-3">
+        <select aria-label="Filter by project type" value={type} onChange={(event) => setType(event.target.value)} className="border border-charcoal/20 bg-ivory px-3 py-3 text-charcoal">
           <option value="">All project types</option>
           {options.types.map((option) => <option key={option}>{option}</option>)}
         </select>
-        <select aria-label="Filter by country" value={country} onChange={(event) => setCountry(event.target.value)} className="border border-charcoal/20 bg-ivory px-3 py-3">
+        <select aria-label="Filter by country" value={country} onChange={(event) => setCountry(event.target.value)} className="border border-charcoal/20 bg-ivory px-3 py-3 text-charcoal">
           <option value="">All countries</option>
           {options.countries.map((option) => <option key={option}>{option}</option>)}
         </select>

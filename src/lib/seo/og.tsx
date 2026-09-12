@@ -21,8 +21,8 @@ export function renderOgImage({ title, eyebrow, siteName, imageUrl }: OgCardInpu
           width: "100%",
           height: "100%",
           position: "relative",
-          backgroundColor: "#1a1a18",
-          color: "#f4f1e9",
+          backgroundColor: "#131313",
+          color: "#ffffff",
           fontFamily: "sans-serif",
         }}
       >
@@ -40,7 +40,7 @@ export function renderOgImage({ title, eyebrow, siteName, imageUrl }: OgCardInpu
           style={{
             position: "absolute",
             inset: 0,
-            background: "linear-gradient(120deg, rgba(20,20,18,0.95) 20%, rgba(20,20,18,0.55) 100%)",
+            background: "linear-gradient(120deg, rgba(19,19,19,0.95) 20%, rgba(19,19,19,0.55) 100%)",
           }}
         />
         <div
@@ -53,13 +53,13 @@ export function renderOgImage({ title, eyebrow, siteName, imageUrl }: OgCardInpu
             padding: 80,
           }}
         >
-          <div style={{ display: "flex", fontSize: 30, letterSpacing: 4, textTransform: "uppercase", color: "#c8a24a" }}>
+          <div style={{ display: "flex", fontSize: 30, letterSpacing: 4, textTransform: "uppercase", color: "#cbb98a" }}>
             {eyebrow ?? siteName}
           </div>
           <div style={{ display: "flex", fontSize: 68, lineHeight: 1.1, fontWeight: 600, maxWidth: 1000 }}>
             {title.length > 120 ? `${title.slice(0, 117)}…` : title}
           </div>
-          <div style={{ display: "flex", fontSize: 28, color: "rgba(244,241,233,0.7)" }}>{siteName}</div>
+          <div style={{ display: "flex", fontSize: 28, color: "rgba(255,255,255,0.7)" }}>{siteName}</div>
         </div>
       </div>
     ),

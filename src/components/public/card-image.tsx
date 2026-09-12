@@ -6,7 +6,7 @@ import type { MediaDTO } from "@/lib/media/contracts";
 export function CardImage({ href, title, meta, image }: { href: string; title: string; meta?: string; image?: MediaDTO }) {
   return (
     <Link href={href as Route} className="group block focus-visible:outline-accent">
-      <div className="aspect-[4/3] overflow-hidden bg-charcoal/10">
+      <div className="aspect-[4/3] overflow-hidden bg-white/10">
         {image ? <CloudinaryImage media={image} sizes="(min-width:1024px) 30vw, (min-width:640px) 45vw, 100vw" className="h-full w-full object-cover transition duration-700 group-hover:scale-105" /> : null}
       </div>
       <div className="mt-4 flex items-start justify-between gap-4">

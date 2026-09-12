@@ -32,7 +32,7 @@ export function HeroSection({ section, copy, heroMedia }: { section: PublicSecti
         <h1 className="font-heading text-display"><Heading text={slides[index]?.title ?? section.heading ?? ""} accent={typeof slides[index]?.data.accentWord === "string" ? slides[index].data.accentWord : undefined} /></h1>
         {(slides[index]?.body ?? section.subheading) && <p className="mt-6 max-w-2xl text-lg leading-8 text-ivory/75">{slides[index]?.body ?? section.subheading}</p>}
         <div className="mt-9 flex flex-wrap gap-3">
-          {(slides[index]?.ctaLabel ?? section.ctaLabel) && (slides[index]?.ctaUrl ?? section.ctaUrl) && <Link href={(slides[index]?.ctaUrl ?? section.ctaUrl) as Route} className="inline-flex min-h-12 items-center bg-accent px-6 text-white">{slides[index]?.ctaLabel ?? section.ctaLabel}</Link>}
+          {(slides[index]?.ctaLabel ?? section.ctaLabel) && (slides[index]?.ctaUrl ?? section.ctaUrl) && <Link href={(slides[index]?.ctaUrl ?? section.ctaUrl) as Route} className="inline-flex min-h-12 items-center bg-accent px-6 font-semibold uppercase tracking-[0.1em] text-charcoal">{slides[index]?.ctaLabel ?? section.ctaLabel}</Link>}
           {typeof slides[index]?.data.secondaryCtaLabel === "string" && typeof slides[index]?.data.secondaryCtaUrl === "string" && <Link href={slides[index].data.secondaryCtaUrl as Route} className="inline-flex min-h-12 items-center border border-ivory/60 px-6">{slides[index].data.secondaryCtaLabel}</Link>}
         </div>
       </div>

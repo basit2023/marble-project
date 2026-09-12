@@ -1,19 +1,19 @@
 import type { ReactNode } from "react";
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Manrope } from "next/font/google";
+import { Montserrat, Manrope } from "next/font/google";
 import { getSystemCopy } from "@/lib/content";
 import { getSeoSite } from "@/lib/seo/site";
 import { SystemCopyProvider } from "@/components/ui/system-screens";
 import "./globals.css";
 
-const heading = Cormorant_Garamond({
+const heading = Montserrat({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["500", "600", "700"],
   display: "swap",
   preload: true,
-  fallback: ["Georgia", "Cambria", "Times New Roman", "serif"],
+  fallback: ["Arial", "Helvetica", "sans-serif"],
   adjustFontFallback: true,
-  variable: "--font-cormorant",
+  variable: "--font-display",
 });
 const body = Manrope({
   subsets: ["latin"],

@@ -39,7 +39,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
         <aside className="grid content-start gap-4 text-sm uppercase tracking-[0.14em] text-muted">
           {project.client ? <p>Client: {project.client}</p> : null}<p>Location: {project.location}</p><p>Year: {project.year}</p>
         </aside>
-        <div><RichText html={project.description} /><div className="mt-8 flex flex-wrap gap-2">{project.materialsUsed.map((item) => <Link key={item.id} href={`/materials/${item.categorySlug}/${item.slug}` as Route} className="border border-charcoal/15 px-3 py-1 text-sm">{item.name}</Link>)}</div></div>
+        <div><RichText html={project.description} /><div className="mt-8 flex flex-wrap gap-2">{project.materialsUsed.map((item) => <Link key={item.id} href={`/materials/${item.categorySlug}/${item.slug}` as Route} className="border border-ivory/15 px-3 py-1 text-sm">{item.name}</Link>)}</div></div>
       </section>
       {project.gallery.length ? <section className="page-shell grid gap-4 pb-section md:grid-cols-2">{project.gallery.map((image) => <CloudinaryImage key={image.id} media={image} sizes="(min-width:768px) 50vw, 100vw" className="aspect-[4/3] w-full object-cover" />)}</section> : null}
       <JsonLd data={[

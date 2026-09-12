@@ -50,7 +50,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       <PageHero eyebrow={[data.post.category, data.post.publishedAt ? formatDate(data.post.publishedAt) : undefined, `${data.post.readTimeMinutes} min read`].filter(Boolean).join(" / ")} title={data.post.title} body={data.post.excerpt} image={data.post.coverImage} breadcrumbs={trail} />
       <BlogArticleClient html={data.post.content} title={data.post.title} />
       <section className="page-shell pb-section">
-        <div className="border-t border-charcoal/10 pt-8"><h2 className="font-heading text-4xl">Author</h2><p className="mt-3 text-muted">{data.post.author?.name ?? "Editorial team"}{data.post.author?.role ? ` / ${data.post.author.role}` : ""}</p></div>
+        <div className="border-t border-ivory/10 pt-8"><h2 className="font-heading text-4xl">Author</h2><p className="mt-3 text-muted">{data.post.author?.name ?? "Editorial team"}{data.post.author?.role ? ` / ${data.post.author.role}` : ""}</p></div>
       </section>
       {data.related.length ? <section className="page-shell grid gap-8 pb-section md:grid-cols-3"><h2 className="font-heading text-title md:col-span-3">Related posts</h2>{data.related.map((post) => <CardImage key={post.id} href={`/blog/${post.slug}`} title={post.title} meta={post.category} image={post.coverImage} />)}</section> : null}
       <JsonLd data={[
