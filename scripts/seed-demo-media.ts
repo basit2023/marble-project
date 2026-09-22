@@ -26,13 +26,22 @@ const seo = (title: string, description: string) => ({
 });
 
 const assets = [
-  { key: "demo-white-marble", file: "demo-white-marble.png", title: "Demo white marble slab", folder: "products", usageContext: "product", altText: "Polished white marble slab with soft grey veining in a showroom" },
-  { key: "demo-black-granite", file: "demo-black-granite.png", title: "Demo black granite slab", folder: "products", usageContext: "product", altText: "Polished black granite slab with fine silver mineral flecks" },
-  { key: "demo-honey-onyx", file: "demo-honey-onyx.png", title: "Demo honey onyx slab", folder: "products", usageContext: "product", altText: "Backlit honey onyx slab with warm amber veining" },
-  { key: "demo-villa-project", file: "demo-villa-project.png", title: "Demo villa stone interior", folder: "projects", usageContext: "project", altText: "Modern villa interior with marble flooring and natural stone wall cladding" },
-  { key: "demo-export-container", file: "demo-export-container.png", title: "Demo export container loading", folder: "home", usageContext: "hero", altText: "Natural stone slabs packed on A-frames beside an export shipping container" },
-  { key: "demo-exhibition-booth", file: "demo-exhibition-booth.png", title: "Demo natural stone exhibition booth", folder: "exhibitions", usageContext: "exhibition", altText: "Elegant exhibition booth displaying marble granite and onyx slabs" },
-  { key: "demo-factory-polishing", file: "demo-factory-polishing.png", title: "Demo marble polishing facility", folder: "brand", usageContext: "other", altText: "Marble slab polishing line inside a clean natural stone processing facility" },
+  { key: "demo-white-marble", file: "demo-white-marble.png", title: "Ziarat White Marble Slab", folder: "products", usageContext: "product", altText: "Polished white marble slab with soft grey veining in a showroom" },
+  { key: "demo-black-granite", file: "demo-black-granite.png", title: "Premium Black Granite Slab", folder: "products", usageContext: "product", altText: "Polished black granite slab with fine silver mineral flecks" },
+  { key: "demo-honey-onyx", file: "demo-honey-onyx.png", title: "Honey Onyx Translucent Slab", folder: "products", usageContext: "product", altText: "Backlit honey onyx slab with warm amber veining" },
+  { key: "ai-green-quartzite", file: "ai-green-quartzite.png", title: "Emerald Green Quartzite Slab", folder: "products", usageContext: "product", altText: "Luxury emerald green quartzite slab with deep exotic veining" },
+  { key: "ai-limestone-showroom", file: "ai-limestone-showroom.png", title: "Crema Limestone Architectural Slab", folder: "products", usageContext: "product", altText: "Refined beige crema limestone slab in showroom" },
+  { key: "ai-marble-kitchen", file: "ai-marble-kitchen.png", title: "Imperial Marble Kitchen Countertop", folder: "products", usageContext: "product", altText: "Luxury kitchen island with polished white marble countertop" },
+  { key: "ai-marble-quarry", file: "ai-marble-quarry.png", title: "Raw Mountain Marble Quarry", folder: "home", usageContext: "hero", altText: "Spectacular mountain marble quarry with raw stone blocks" },
+  { key: "ai-onyx-bathroom", file: "ai-onyx-bathroom.png", title: "Translucent Amber Onyx Wall Panel", folder: "products", usageContext: "product", altText: "Backlit luxury onyx bathroom wall cladding" },
+  { key: "ai-sandstone-display", file: "ai-sandstone-display.png", title: "Desert Gold Sandstone Tile", folder: "products", usageContext: "product", altText: "Warm desert gold sandstone architectural paving display" },
+  { key: "ai-slate-display", file: "ai-slate-display.png", title: "Charcoal Slate Wall Cladding", folder: "products", usageContext: "product", altText: "Textured charcoal graphite slate panel display" },
+  { key: "ai-stone-facade", file: "ai-stone-facade.png", title: "Villa Exterior Stone Facade", folder: "projects", usageContext: "project", altText: "Modern villa exterior with natural stone wall cladding facade" },
+  { key: "ai-travertine-showroom", file: "ai-travertine-showroom.png", title: "Silver Travertine Flooring Slab", folder: "products", usageContext: "product", altText: "Honed silver vein travertine slab display" },
+  { key: "demo-villa-project", file: "demo-villa-project.png", title: "Modern Villa Stone Interior", folder: "projects", usageContext: "project", altText: "Modern villa interior with marble flooring and stone cladding" },
+  { key: "demo-export-container", file: "demo-export-container.png", title: "Export Container Crate Freight", folder: "home", usageContext: "hero", altText: "Natural stone slabs packed on A-frames beside an export shipping container" },
+  { key: "demo-exhibition-booth", file: "demo-exhibition-booth.png", title: "Natural Stone International Exhibition", folder: "exhibitions", usageContext: "exhibition", altText: "Elegant exhibition booth displaying marble, granite and onyx slabs" },
+  { key: "demo-factory-polishing", file: "demo-factory-polishing.png", title: "Marble Slab Processing Facility", folder: "brand", usageContext: "other", altText: "Marble slab polishing line inside a stone processing facility" },
 ] as const;
 
 async function cloudinaryTimestamp(cloudName: string) {
@@ -69,7 +78,9 @@ async function main() {
     const uploadTimestamp = await cloudinaryTimestamp(env.CLOUDINARY_CLOUD_NAME);
     const mediaByKey = new Map<string, Types.ObjectId>();
     for (const [sortOrder, asset] of assets.entries()) {
-      const existing = await Media.findOne({ title: asset.title, isDeleted: false });
+      const publicId = `marble-site/${asset.folder}/${asset.key}`;
+      let existing = await Media.findOne({ cloudinaryPublicId: publicId, isDeleted: false });
+      if (!existing) existing = await Media.findOne({ title: asset.title, isDeleted: false });
       if (existing) {
         mediaByKey.set(asset.key, existing._id);
         continue;
@@ -121,7 +132,7 @@ async function main() {
           description: `Explore active ${name.toLowerCase()} slabs, tiles and custom-cut surfaces for local and export projects.`,
           shortDescription: `${name} slabs, tiles and custom cuts`,
           coverImage: mediaByKey.get(imageKey),
-          seo: seo(`${name} in Pakistan`, `Browse ${name.toLowerCase()} slabs, tiles and custom cuts for Pakistan and export projects.`),
+          seo: seo(`${name} Stone`, `Browse ${name.toLowerCase()} slabs, tiles and custom cuts for projects worldwide.`),
           isFeatured: true,
           showInMenu: true,
           showOnHomepage: true,
@@ -137,7 +148,7 @@ async function main() {
           isFeatured: true,
           showInMenu: true,
           showOnHomepage: true,
-          seo: category.seo?.noIndex === undefined ? seo(`${name} in Pakistan`, `Browse ${name.toLowerCase()} slabs, tiles and custom cuts for Pakistan and export projects.`) : category.seo,
+          seo: category.seo?.noIndex === undefined ? seo(`${name} Stone`, `Browse ${name.toLowerCase()} slabs, tiles and custom cuts for projects.`) : category.seo,
           updatedBy: user._id,
         });
         await category.save();
@@ -148,8 +159,11 @@ async function main() {
     const marble = await ensureCategory("Marble", "demo-white-marble", 0);
     const granite = await ensureCategory("Granite", "demo-black-granite", 1);
     const onyx = await ensureCategory("Onyx", "demo-honey-onyx", 2);
+    const quartzite = await ensureCategory("Quartzite", "ai-green-quartzite", 3);
+    const limestone = await ensureCategory("Limestone", "ai-limestone-showroom", 4);
+    const travertine = await ensureCategory("Travertine", "ai-travertine-showroom", 5);
 
-    const ensureProduct = async (name: string, category: typeof marble, imageKey: string, colourFamily: "White" | "Black" | "Gold", sortOrder: number) => {
+    const ensureProduct = async (name: string, category: typeof marble, imageKey: string, colourFamily: "White" | "Black" | "Gold" | "Green" | "Beige" | "Grey", priceMin: number, priceMax: number, sortOrder: number) => {
       const slug = slugify(name);
       const image = mediaByKey.get(imageKey);
       const doc = await Product.findOne({ slug, isDeleted: false });
@@ -157,23 +171,23 @@ async function main() {
         name,
         slug,
         category: category._id,
-        description: `${name} is a demo catalogue stone seeded for testing product detail pages, filters, galleries and quote forms.`,
+        description: `${name} is a premium luxury stone available in slabs and custom cut-to-size formats for architectural countertops, flooring, and wall cladding.`,
         origin: "Pakistan",
         colourFamily,
-        finishes: ["Polished", "Honed"],
+        finishes: ["Polished", "Honed", "Leathered"],
         availableFormats: ["Slab", "Tile", "Countertop", "Custom Cut"],
         thicknessOptions: ["18 mm", "20 mm", "30 mm"],
         sizeOptions: ["Random slabs", "600 x 600 mm", "Custom cut"],
-        applications: ["Flooring", "Wall Cladding", "Countertop", "Kitchen"],
-        technicalSpecs: { density: 2.68, waterAbsorption: 0.2, compressiveStrength: 120, flexuralStrength: 14, abrasionResistance: "Suitable for residential and commercial interiors" },
-        priceRange: { min: 1200, max: 4200, currency: "PKR", unit: "sqft" },
+        applications: ["Flooring", "Wall Cladding", "Countertop", "Kitchen", "Bathroom"],
+        technicalSpecs: { density: 2.71, waterAbsorption: 0.15, compressiveStrength: 135, flexuralStrength: 16, abrasionResistance: "Suitable for luxury residential and high-traffic commercial projects" },
+        priceRange: { min: priceMin, max: priceMax, currency: "PKR", unit: "sqft" },
         isPriceVisible: true,
         images: image ? [image] : [],
         primaryImage: image,
         tags: ["demo", category.slug],
         isFeatured: true,
         isExportAvailable: true,
-        stockStatus: "Made to Order",
+        stockStatus: "In Stock",
         seo: seo(name, `${name} slabs, tiles and custom cuts for homes, projects and export buyers.`),
         isActive: true,
         isDeleted: false,
@@ -186,9 +200,14 @@ async function main() {
       return doc.save();
     };
 
-    const whiteMarble = await ensureProduct("Ziarat White Marble Demo", marble, "demo-white-marble", "White", 0);
-    const blackGranite = await ensureProduct("Premium Black Granite Demo", granite, "demo-black-granite", "Black", 1);
-    const honeyOnyx = await ensureProduct("Honey Onyx Demo", onyx, "demo-honey-onyx", "Gold", 2);
+    const whiteMarble = await ensureProduct("Ziarat White Marble", marble, "demo-white-marble", "White", 2200, 4800, 0);
+    const blackGranite = await ensureProduct("Premium Black Granite", granite, "demo-black-granite", "Black", 1800, 3900, 1);
+    const honeyOnyx = await ensureProduct("Honey Translucent Onyx", onyx, "demo-honey-onyx", "Gold", 4500, 9500, 2);
+    await ensureProduct("Emerald Green Quartzite", quartzite, "ai-green-quartzite", "Green", 3800, 7200, 3);
+    await ensureProduct("Classic Crema Limestone", limestone, "ai-limestone-showroom", "Beige", 1950, 3600, 4);
+    await ensureProduct("Silver Vein Travertine", travertine, "ai-travertine-showroom", "Grey", 2400, 5100, 5);
+    await ensureProduct("Imperial Kitchen Marble", marble, "ai-marble-kitchen", "White", 2900, 5800, 6);
+    await ensureProduct("Royal Amber Onyx Panel", onyx, "ai-onyx-bathroom", "Gold", 5200, 11000, 7);
 
     const projectSlug = "modern-villa-stone-interior-demo";
     const projectImage = mediaByKey.get("demo-villa-project");
@@ -313,18 +332,39 @@ async function main() {
     }
 
     const homeSections = [
-      { sectionKey: "hero", heading: "Pakistani natural stone for refined spaces", subheading: "Demo homepage content with Cloudinary-hosted images.", eyebrowLabel: "Marble / Granite / Onyx", backgroundImage: mediaByKey.get("demo-export-container"), sortOrder: 0 },
-      { sectionKey: "materials", heading: "Materials", subheading: "Active categories with seeded cover images.", sortOrder: 2 },
-      { sectionKey: "featuredProducts", heading: "Featured Products", subheading: "Seeded products for carousel testing.", sortOrder: 6 },
-      { sectionKey: "projects", heading: "Projects", subheading: "Featured project cards from MongoDB.", sortOrder: 8 },
-      { sectionKey: "export", heading: "Export Ready", bodyText: "Container loading, documentation and project supply support for international buyers.", backgroundImage: mediaByKey.get("demo-export-container"), ctaLabel: "Send export enquiry", ctaUrl: "/export", sortOrder: 9 },
-      { sectionKey: "blog", heading: "Journal", subheading: "Latest published posts.", sortOrder: 13 },
+      { sectionKey: "hero", heading: "Pakistani natural stone for refined spaces", subheading: "Marble, granite, onyx, and quartzite slabs prepared for luxury residential, commercial and export projects.", eyebrowLabel: "PREMIUM STONE SUPPLIER WORLDWIDE", backgroundImage: mediaByKey.get("demo-white-marble"), ctaLabel: "Explore Materials", ctaUrl: "/materials", sortOrder: 0, items: [
+        { key: "quarry-slide", title: "Raw Mountain Marble Quarry", body: "Direct quarry extraction and precision gang-saw slab processing for world markets.", image: mediaByKey.get("ai-marble-quarry"), ctaLabel: "View Quarry Slabs", ctaUrl: "/materials/marble", data: { secondaryCtaLabel: "Request Quote", secondaryCtaUrl: "/quote" }, isActive: true, sortOrder: 0 },
+        { key: "marble-slide", title: "Ziarat White Marble", body: "Refined pristine white marble for architectural flooring, vanity tops and bookmatched cladding.", image: mediaByKey.get("demo-white-marble"), ctaLabel: "View Marble", ctaUrl: "/materials/marble", data: { secondaryCtaLabel: "Request Quote", secondaryCtaUrl: "/quote" }, isActive: true, sortOrder: 1 },
+        { key: "quartzite-slide", title: "Emerald Green Quartzite", body: "Exotic green quartzite with deep crystalline veining for high-end statement islands.", image: mediaByKey.get("ai-green-quartzite"), ctaLabel: "View Quartzite", ctaUrl: "/materials/quartzite", data: { secondaryCtaLabel: "Request Quote", secondaryCtaUrl: "/quote" }, isActive: true, sortOrder: 2 },
+        { key: "onyx-slide", title: "Translucent Honey Onyx", body: "Warm backlit onyx for feature walls, bar fronts, and illuminated luxury interiors.", image: mediaByKey.get("demo-honey-onyx"), ctaLabel: "View Onyx", ctaUrl: "/materials/onyx", data: { secondaryCtaLabel: "Request Quote", secondaryCtaUrl: "/quote" }, isActive: true, sortOrder: 3 },
+      ] },
+      { sectionKey: "stats", heading: "Stone supplied for demanding projects", sortOrder: 1, items: [
+        { key: "colours", title: "Stone colours", value: "40", data: { suffix: "+" }, isActive: true, sortOrder: 0 },
+        { key: "years", title: "Years experience", value: "15", data: { suffix: "+" }, isActive: true, sortOrder: 1 },
+        { key: "countries", title: "Export countries", value: "12", data: { suffix: "+" }, isActive: true, sortOrder: 2 },
+        { key: "projects", title: "Projects completed", value: "250", data: { suffix: "+" }, isActive: true, sortOrder: 3 },
+      ] },
+      { sectionKey: "materials", heading: "Shop by Material", subheading: "Browse active material categories with real Cloudinary cover images.", ctaLabel: "View all materials", ctaUrl: "/materials", sortOrder: 2 },
+      { sectionKey: "whyUs", heading: "Why Choose Us", subheading: "Catalog-grade selection, export packing and project-focused cutting support.", sortOrder: 3, items: [
+        { key: "selection", title: "Curated material range", body: "Active marble, granite and onyx records are managed directly from MongoDB.", iconKey: "layers", data: { seed: true }, isActive: true, sortOrder: 0 },
+        { key: "quality", title: "Image-led catalogue", body: "Every public image is a Media document with required alt text and visibility control.", iconKey: "quality", data: { seed: true }, isActive: true, sortOrder: 1 },
+        { key: "export", title: "Export ready", body: "Container loading, documentation and bulk enquiry flows are present for international buyers.", iconKey: "globe", data: { seed: true }, isActive: true, sortOrder: 2 },
+        { key: "precision", title: "Custom cuts", body: "Quote requests capture material, quantity, unit, timeline and drawing upload.", iconKey: "precision", data: { seed: true }, isActive: true, sortOrder: 3 },
+      ] },
+      { sectionKey: "featuredProducts", heading: "Featured Products", subheading: "A dark catalog carousel inspired by premium stone storefronts.", sortOrder: 6 },
+      { sectionKey: "projects", heading: "Installed Projects", subheading: "Featured project cards from MongoDB.", sortOrder: 8 },
+      { sectionKey: "export", heading: "Export Ready", bodyText: "Container loading, documentation and project supply support for international buyers.", backgroundImage: mediaByKey.get("demo-export-container"), ctaLabel: "Send export enquiry", ctaUrl: "/export", sortOrder: 9, items: [
+        { key: "containers", title: "Container loading support", data: { seed: true }, isActive: true, sortOrder: 0 },
+        { key: "packing", title: "Slab A-frame packing", data: { seed: true }, isActive: true, sortOrder: 1 },
+        { key: "docs", title: "Export documentation handled", data: { seed: true }, isActive: true, sortOrder: 2 },
+      ] },
+      { sectionKey: "blog", heading: "Stone Journal", subheading: "Latest published posts.", sortOrder: 13 },
       { sectionKey: "cta", heading: "Plan a stone order", subheading: "Send a quote request with material, quantity and timeline.", ctaLabel: "Request a quote", ctaUrl: "/quote", sortOrder: 14 },
     ];
     for (const section of homeSections) {
       const sectionPayload = {
         ...section,
-        items: [],
+        items: "items" in section ? section.items : [],
         isActive: true,
         isDeleted: false,
         createdBy: user._id,

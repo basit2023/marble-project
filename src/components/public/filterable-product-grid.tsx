@@ -40,23 +40,23 @@ export function FilterableProductGrid({ products }: { products: ProductCardDTO[]
   };
   return (
     <section className="page-shell py-section">
-      <div className="mb-10 grid gap-4 md:grid-cols-4">
+      <div className="stone-panel mb-10 grid gap-px bg-white/10 p-px md:grid-cols-4">
         {filters.map(([key, label]) => (
-          <label key={key} className="grid gap-2 text-sm font-semibold uppercase tracking-[0.14em] text-muted">
+          <label key={key} className="grid gap-2 bg-charcoal p-4 text-sm font-semibold uppercase tracking-[0.14em] text-muted">
             {label}
-            <select value={selected[key]} onChange={(event) => setFilter(key, event.target.value)} className="border border-charcoal/20 bg-ivory px-3 py-3 text-charcoal">
+            <select value={selected[key]} onChange={(event) => setFilter(key, event.target.value)} className="border border-white/15 bg-black px-3 py-3 text-ivory">
               <option value="">All</option>
               {(options[key] as string[]).map((option) => <option key={option} value={option}>{option}</option>)}
             </select>
           </label>
         ))}
       </div>
-      <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+      <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
         {filtered.slice(0, visible).map((product) => (
           <CardImage key={product.id} href={`/materials/${product.categorySlug}/${product.slug}`} title={product.name} meta={[product.colourFamily, product.origin].filter(Boolean).join(" / ")} image={product.primaryImage} />
         ))}
       </div>
-      {filtered.length > visible ? <button type="button" onClick={() => setVisible((count) => count + PAGE_SIZE)} className="mt-10 border border-ivory px-6 py-3 text-sm font-semibold uppercase tracking-[0.18em]">Load more</button> : null}
+      {filtered.length > visible ? <button type="button" onClick={() => setVisible((count) => count + PAGE_SIZE)} className="mt-10 border border-accent px-6 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-accent transition hover:bg-accent hover:text-charcoal">Load more</button> : null}
     </section>
   );
 }

@@ -17,7 +17,7 @@ export interface PublicSettings {
   announcementBar: { text?: string; url?: string; isActive: boolean };
   defaultSeo: { metaTitle?: string; metaDescription?: string; keywords: string[]; canonicalUrl?: string; noIndex: boolean; ogImage?: MediaDTO };
 }
-export interface PublicProduct { id: string; name: string; slug: string; categorySlug?: string; origin?: string; colourFamily: string; primaryImage?: MediaDTO }
+export interface PublicProduct { id: string; name: string; slug: string; categorySlug?: string; origin?: string; colourFamily: string; primaryImage?: MediaDTO; priceFormatted?: string }
 export interface PublicProject { id: string; title: string; slug: string; location: string; country: string; coverImage?: MediaDTO; materials: string[] }
 export interface PublicExhibition { id: string; name: string; slug: string; venue: string; city: string; country: string; startDate: string; endDate: string; coverImage?: MediaDTO }
 export interface PublicTestimonial { id: string; clientName: string; clientTitle?: string; company?: string; rating: number; message: string; clientPhoto?: MediaDTO }

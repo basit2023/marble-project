@@ -18,6 +18,7 @@
     "seed:admin-content": "node --conditions=react-server --import tsx scripts/seed-admin-content.ts"
     ,"seed:public-ui": "node --conditions=react-server --import tsx scripts/seed-public-ui.ts",
     "seed:demo-media": "node --conditions=react-server --import tsx scripts/seed-demo-media.ts",
+    "seed:extra-ai-media": "node --conditions=react-server --import tsx scripts/seed-extra-ai-media.ts",
     "check:demo-public": "node --conditions=react-server --import tsx scripts/check-demo-public.ts"
   },
   "dependencies": {

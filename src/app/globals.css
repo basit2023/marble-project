@@ -1,14 +1,20 @@
 @import "tailwindcss";
 
 @theme {
-  /* AK Masonry Stone-inspired palette: the site is dark-first — near-black ground,
-     white ink, antique-gold accent (buttons pair the accent with dark text, per
-     the reference brand, not white text — keep that pairing when adding new UI). */
-  --color-charcoal: #131313;
+  /* AKMA Stone luxury dark palette: deep obsidian background, crisp white typography,
+     antique champagne-gold accents, and glassmorphic dark surface panels. */
+  --color-charcoal: #0e0e0e;
+  --color-obsidian: #080808;
+  --color-panel: #161616;
+  --color-panel-light: #1e1e1e;
   --color-ivory: #ffffff;
-  --color-accent: #c4b893;
-  --color-gold-soft: #eadfc5;
-  --color-muted: #a8a29a;
+  --color-accent: #c5b391;
+  --color-accent-dark: #a89572;
+  --color-gold-soft: #dcd0b7;
+  --color-muted: #9e988f;
+  --color-border-dark: rgba(255, 255, 255, 0.12);
+  --color-border-gold: rgba(197, 179, 145, 0.35);
+
   --text-caption: clamp(0.75rem, 0.72rem + 0.12vw, 0.875rem);
   --text-body: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
   --text-title: clamp(2rem, 1.35rem + 2.8vw, 4.25rem);
@@ -17,48 +23,132 @@
   --text-display: clamp(2.5rem, 1.35rem + 4.6vw, 6.25rem);
   --text-display--line-height: 1.02;
   --text-display--letter-spacing: -0.02em;
+
   --spacing: 0.25rem;
   --spacing-section: clamp(4rem, 2rem + 6vw, 9rem);
   --spacing-gutter: clamp(1.25rem, 0.6rem + 3vw, 4rem);
   --container-editorial: 90rem;
   --container-reading: 48rem;
 }
+
 @theme inline {
-  --font-heading: var(--font-display), Arial, Helvetica, sans-serif;
+  --font-heading: var(--font-display), Montserrat, Arial, sans-serif;
   --font-sans: var(--font-manrope), Arial, sans-serif;
 }
+
 @layer base {
-  /* The public site is dark-themed end to end; the admin dashboard opts back into
-     a light surface itself (see its own background utility), independent of this. */
-  body { @apply bg-charcoal text-ivory font-sans antialiased; }
-  h1, h2, h3, h4, h5, h6 { font-weight: 600; }
-  :focus-visible { outline: 2px solid var(--color-accent); outline-offset: 4px; }
-  button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
-  button, a { touch-action: manipulation; }
-  button:not(:disabled) { cursor: pointer; }
-  ::selection { background: var(--color-ivory); color: var(--color-charcoal); }
+  body {
+    background-color: var(--color-charcoal);
+    color: var(--color-ivory);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 4px;
+  }
+  button, a, input, select, textarea {
+    -webkit-tap-highlight-color: transparent;
+  }
+  button, a {
+    touch-action: manipulation;
+  }
+  button:not(:disabled) {
+    cursor: pointer;
+  }
+  ::selection {
+    background: var(--color-accent);
+    color: var(--color-charcoal);
+  }
 }
-@keyframes ken-burns { from { transform: scale(1); } to { transform: scale(1.08); } }
-@utility animate-ken-burns { animation: ken-burns 9s ease-out both; }
-.prose { color: var(--color-muted); line-height: 1.75; }
-.prose p + p, .prose ul, .prose ol, .prose blockquote { margin-top: 1rem; }
-.prose ul { list-style: disc; padding-left: 1.25rem; }
-.prose ol { list-style: decimal; padding-left: 1.25rem; }
-.prose a { color: var(--color-accent); text-decoration: underline; text-underline-offset: 3px; }
+
+@keyframes ken-burns {
+  from { transform: scale(1); }
+  to { transform: scale(1.08); }
+}
+
+@utility animate-ken-burns {
+  animation: ken-burns 12s cubic-bezier(0.25, 1, 0.5, 1) both;
+}
+
+.prose {
+  color: var(--color-muted);
+  line-height: 1.75;
+}
+.prose p + p, .prose ul, .prose ol, .prose blockquote {
+  margin-top: 1rem;
+}
+.prose ul {
+  list-style: disc;
+  padding-left: 1.25rem;
+}
+.prose ol {
+  list-style: decimal;
+  padding-left: 1.25rem;
+}
+.prose a {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 @utility page-shell {
   width: 100%;
   max-width: var(--container-editorial);
   margin-inline: auto;
   padding-inline: var(--spacing-gutter);
 }
-@utility editorial-label { font-size: var(--text-caption); font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; }
-/* Thin gold rule used under eyebrow labels and section headings for a boutique, catalog-style divider. */
+
+@utility editorial-label {
+  font-size: var(--text-caption);
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
 @utility gold-rule {
   display: block;
-  width: 2.5rem;
+  width: 2.75rem;
   height: 2px;
   background: var(--color-accent);
 }
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+
+@utility gold-border {
+  border: 1px solid var(--color-border-gold);
 }
+
+@utility stone-panel {
+  border: 1px solid var(--color-border-dark);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(0, 0, 0, 0.4) 100%),
+    var(--color-panel);
+}
+
+@utility stone-panel-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.stone-panel-hover:hover {
+  border-color: var(--color-accent);
+  transform: translateY(-3px);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.6);
+}
+
+@utility stone-vein {
+  background-image:
+    url("data:image/svg+xml,%3Csvg width='220' height='220' viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M-24 178C36 134 62 87 120 76c38-7 62-38 126-84' fill='none' stroke='%23c5b391' stroke-opacity='.14' stroke-width='1'/%3E%3Cpath d='M-18 66C30 82 54 121 102 132c46 11 74 38 134 68' fill='none' stroke='%23ffffff' stroke-opacity='.05' stroke-width='1'/%3E%3Cpath d='M34 230c20-52 55-78 104-96 28-10 48-28 70-62' fill='none' stroke='%23c5b391' stroke-opacity='.09' stroke-width='1'/%3E%3C/svg%3E");
+  background-size: 220px 220px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+

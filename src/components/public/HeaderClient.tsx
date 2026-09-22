@@ -3,7 +3,7 @@ import Link from "next/link";
 import type { Route } from "next";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
-import { ChevronDown, Menu, Phone } from "lucide-react";
+import { ChevronDown, Menu, Phone, Search, Globe2, ArrowRight } from "lucide-react";
 import { CloudinaryImage } from "@/components/ui/cloudinary-image";
 import { MobileMenu } from "./MobileMenu";
 import { cn } from "@/lib/utils";
@@ -54,8 +54,6 @@ export function HeaderClient({ siteName, logo, phone, quoteUrl, nav, materials }
 
   const openDropdown = () => { if (closeTimer.current) clearTimeout(closeTimer.current); setMaterialsOpen(true); };
   const scheduleClose = () => { closeTimer.current = setTimeout(() => setMaterialsOpen(false), 120); };
-  // Open when focus enters a submenu link (keyboard), but not when the trigger
-  // itself is tab-focused — that stays a manual toggle via Enter/Space.
   const onDropdownFocus = (event: React.FocusEvent<HTMLLIElement>) => {
     if ((event.target as HTMLElement) !== dropdownButtonRef.current) openDropdown();
   };
@@ -63,27 +61,50 @@ export function HeaderClient({ siteName, logo, phone, quoteUrl, nav, materials }
     if (!event.currentTarget.contains(event.relatedTarget)) setMaterialsOpen(false);
   };
 
-  const linkClass = "flex min-h-11 items-center px-3 text-[13px] font-semibold uppercase tracking-[0.1em] text-ivory/80 transition-colors hover:text-ivory aria-[current=page]:text-ivory aria-[current=page]:underline aria-[current=page]:decoration-accent aria-[current=page]:underline-offset-[10px]";
+  const linkClass = "flex min-h-11 items-center px-3.5 text-[12px] font-bold uppercase tracking-[0.14em] text-ivory/80 transition-colors hover:text-accent aria-[current=page]:text-accent aria-[current=page]:underline aria-[current=page]:decoration-accent aria-[current=page]:underline-offset-[10px]";
 
   return (
     <>
       <header
         className={cn(
           "fixed inset-x-0 top-0 z-50 transition-colors duration-300",
-          transparent ? "bg-transparent" : "bg-charcoal shadow-lg shadow-black/25",
+          transparent ? "border-b border-white/10 bg-black/40 backdrop-blur-md" : "border-b border-white/10 bg-[#0a0a0a]/95 shadow-2xl backdrop-blur-lg",
         )}
       >
-        <div className="page-shell flex h-20 items-center gap-4 text-ivory">
-          <Link href="/" aria-label={siteName} className="flex shrink-0 items-center">
+        {/* Top Announcement Bar inspired by AKMA Stone */}
+        <div className="hidden border-b border-white/10 bg-black/60 py-2 text-[11px] uppercase tracking-[0.18em] text-ivory/70 lg:block">
+          <div className="page-shell flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <span className="inline-flex items-center gap-1.5 text-accent font-semibold">
+                <Globe2 className="size-3.5" /> Premium Stone Supplier Worldwide
+              </span>
+              <span className="text-white/20">|</span>
+              <span>Marble • Granite • Onyx • Travertine</span>
+            </div>
+            <div className="flex items-center gap-6">
+              {phone ? <a href={`tel:${phone.replace(/[^+\d]/g, "")}`} className="flex items-center gap-1.5 hover:text-white transition-colors"><Phone className="size-3 text-accent" />{phone}</a> : null}
+              <Link href={"/search" as Route} className="inline-flex items-center gap-1.5 hover:text-accent transition-colors"><Search className="size-3.5" />Search Catalog</Link>
+            </div>
+          </div>
+        </div>
+
+        <div className="page-shell flex h-20 items-center justify-between gap-4 text-ivory lg:h-[4.75rem]">
+          <Link href="/" aria-label={siteName} className="flex shrink-0 items-center gap-3">
             {logo ? (
-              <CloudinaryImage media={logo} sizes="180px" priority className="h-9 w-auto max-w-[180px] object-contain" />
+              <CloudinaryImage media={logo} sizes="180px" priority className="h-10 w-auto max-w-[180px] object-contain" />
             ) : (
-              <span className="font-heading text-2xl leading-none">{siteName}</span>
+              <div className="flex items-center gap-2">
+                <span className="flex size-9 items-center justify-center rounded border border-accent/40 bg-accent/10 font-heading font-bold text-accent">A</span>
+                <div className="flex flex-col">
+                  <span className="font-heading text-xl font-bold tracking-widest uppercase text-white leading-none">{siteName}</span>
+                  <span className="text-[9px] uppercase tracking-[0.25em] text-accent mt-0.5">Natural Stone Excellence</span>
+                </div>
+              </div>
             )}
           </Link>
 
-          <nav aria-label="Primary" className="mx-auto hidden lg:block">
-            <ul className="flex items-center">
+          <nav aria-label="Primary" className="hidden lg:block">
+            <ul className="flex items-center gap-1">
               {nav.map((link) => {
                 if (link.url === "/materials" && materials.length > 0) {
                   return (
@@ -106,22 +127,23 @@ export function HeaderClient({ siteName, logo, phone, quoteUrl, nav, materials }
                         className={cn(linkClass, "gap-1")}
                       >
                         {link.label}
-                        <ChevronDown className={cn("size-4 transition-transform", materialsOpen && "rotate-180")} aria-hidden="true" />
+                        <ChevronDown className={cn("size-3.5 transition-transform text-accent", materialsOpen && "rotate-180")} aria-hidden="true" />
                       </button>
                       <ul
                         hidden={!materialsOpen}
-                        className="absolute left-1/2 top-full w-64 -translate-x-1/2 border border-white/10 bg-charcoal p-2 shadow-2xl shadow-black/40"
+                        className="stone-vein absolute left-1/2 top-full w-72 -translate-x-1/2 rounded-sm border border-white/15 bg-[#121212] p-2 shadow-2xl shadow-black/80"
                       >
                         <li>
-                          <Link href="/materials" className="block px-3 py-2.5 text-sm text-ivory/75 hover:bg-white/10 hover:text-ivory">
-                            All materials
+                          <Link href="/materials" className="flex items-center justify-between border-b border-white/10 px-4 py-3 text-xs font-semibold uppercase tracking-wider text-accent hover:bg-white/5">
+                            <span>All Stone Materials</span>
+                            <ArrowRight className="size-3.5" />
                           </Link>
                         </li>
                         {materials.map((material) => (
                           <li key={material.slug}>
                             <Link
                               href={`/materials/${material.slug}` as Route}
-                              className="block px-3 py-2.5 text-sm text-ivory/75 hover:bg-white/10 hover:text-ivory"
+                              className="block px-4 py-2.5 text-xs text-ivory/80 hover:bg-white/10 hover:text-white transition-colors"
                             >
                               {material.name}
                             </Link>
@@ -148,16 +170,13 @@ export function HeaderClient({ siteName, logo, phone, quoteUrl, nav, materials }
             </ul>
           </nav>
 
-          <div className="ml-auto hidden items-center gap-3 lg:flex">
-            {phone && (
-              <a href={`tel:${phone.replace(/[^+\d]/g, "")}`} className="flex min-h-11 items-center gap-2 px-2 text-sm text-ivory/80 hover:text-ivory">
-                <Phone className="size-4" aria-hidden="true" />
-                {phone}
-              </a>
-            )}
+          <div className="hidden items-center gap-4 lg:flex">
+            <Link href={"/search" as Route} aria-label="Search" className="grid size-10 place-items-center border border-white/15 text-ivory/70 transition hover:border-accent hover:text-accent">
+              <Search className="size-4" />
+            </Link>
             <Link
               href={quoteUrl as Route}
-              className="flex min-h-11 items-center bg-accent px-5 text-[13px] font-semibold uppercase tracking-[0.1em] text-charcoal transition-colors hover:bg-accent/85"
+              className="flex min-h-11 items-center bg-accent px-6 text-[12px] font-bold uppercase tracking-[0.14em] text-charcoal shadow-lg shadow-accent/20 transition-all hover:bg-gold-soft hover:scale-[1.02]"
             >
               Get a Quote
             </Link>
@@ -177,8 +196,7 @@ export function HeaderClient({ siteName, logo, phone, quoteUrl, nav, materials }
         </div>
       </header>
 
-      {/* Spacer so non-transparent pages never hide content under the fixed header. */}
-      {!isHome && <div aria-hidden="true" className="h-20 bg-charcoal" />}
+      {!isHome && <div aria-hidden="true" className="h-20 bg-charcoal lg:h-[7rem]" />}
 
       <MobileMenu
         open={menuOpen}
@@ -192,3 +210,4 @@ export function HeaderClient({ siteName, logo, phone, quoteUrl, nav, materials }
     </>
   );
 }
+

@@ -139,8 +139,25 @@ export const getHomepageData = cache(async (): Promise<HomepageData | null> => {
       return { id: id(row._id), name: row.name, slug: row.slug, shortDescription: row.shortDescription, coverImage: media(row.coverImage) };
     }), sections,
     products: productsRaw.map((item) => {
-      const row = item as typeof item & { primaryImage?: PopulatedMedia; category?: { slug?: string } | null };
-      return { id: id(row._id), name: row.name, slug: row.slug, categorySlug: row.category?.slug, origin: row.origin, colourFamily: row.colourFamily, primaryImage: media(row.primaryImage) };
+      const row = item as typeof item & {
+        primaryImage?: PopulatedMedia;
+        category?: { slug?: string } | null;
+        isPriceVisible?: boolean;
+        priceRange?: { min?: number; max?: number; currency?: string; unit?: string };
+      };
+      const priceFormatted = row.isPriceVisible && row.priceRange?.min
+        ? `${row.priceRange.currency ?? "PKR"} ${row.priceRange.min.toLocaleString()}/${row.priceRange.unit ?? "sqft"}`
+        : undefined;
+      return {
+        id: id(row._id),
+        name: row.name,
+        slug: row.slug,
+        categorySlug: row.category?.slug,
+        origin: row.origin,
+        colourFamily: row.colourFamily,
+        primaryImage: media(row.primaryImage),
+        priceFormatted,
+      };
     }) satisfies PublicProduct[],
     heroMedia: heroRaw.map((item) => toMediaDTO(item)),
     gallery: galleryRaw.map((item) => toMediaDTO(item)),
