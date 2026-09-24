@@ -19,6 +19,7 @@
     ,"seed:public-ui": "node --conditions=react-server --import tsx scripts/seed-public-ui.ts",
     "seed:demo-media": "node --conditions=react-server --import tsx scripts/seed-demo-media.ts",
     "seed:extra-ai-media": "node --conditions=react-server --import tsx scripts/seed-extra-ai-media.ts",
+    "seed:news-articles": "node --conditions=react-server --import tsx scripts/seed-news-articles.ts",
     "check:demo-public": "node --conditions=react-server --import tsx scripts/check-demo-public.ts"
   },
   "dependencies": {
